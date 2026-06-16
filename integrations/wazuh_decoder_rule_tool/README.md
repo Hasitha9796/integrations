@@ -2,6 +2,56 @@
 
 A FastAPI web application that intelligently generates custom Wazuh decoder and rule XML for any log format. It combines `wazuh-logtest` verification, machine learning similarity search, RAG (Retrieval-Augmented Generation), and a local LLM to produce accurate, ready-to-use Wazuh XML — without manual regex writing.
 
+---
+
+## Demo
+
+> A quick walkthrough: paste a raw log → analyze → generate decoder + rule XML → test against `wazuh-logtest`.
+
+![Demo](docs/demo.gif)
+
+> **To record your own demo GIF:**
+> - **Linux**: `peek` or `byzanz-record -d 60 -w 1280 -h 800 demo.gif`
+> - **Mac**: [Kap](https://getkap.co) (free, exports GIF directly)
+> - **Any platform**: record with OBS then convert: `ffmpeg -i demo.mp4 -vf "fps=10,scale=1280:-1" demo.gif`
+>
+> Place the file at `docs/demo.gif` and remove this note.
+
+---
+
+## Screenshots
+
+### 1 — Log Analysis
+
+Paste one or more raw log lines and click **Analyze**. The app runs `wazuh-logtest`, extracts fields, and shows ML similarity suggestions.
+
+![Log Analysis](docs/screenshots/01_analyze.png)
+
+### 2 — Field Extraction & Decoder Generation
+
+Select the fields you want to extract. Click **Generate** for instant programmatic decoder + rule XML.
+
+![Generate](docs/screenshots/02_generate.png)
+
+### 3 — AI-Assisted Generation
+
+Click **AI Generate** to send the analysis to the local Ollama model. The response streams in real time and produces improved `osregex` patterns.
+
+![AI Generate](docs/screenshots/03_ai_generate.png)
+
+### 4 — Test Against wazuh-logtest
+
+Click **Test** to install the generated decoder temporarily and validate it against your live Wazuh instance.
+
+![Test Result](docs/screenshots/04_test_result.png)
+
+> **To add your own screenshots:**
+> 1. Create the `docs/screenshots/` directory: `mkdir -p docs/screenshots`
+> 2. Take screenshots of each step and save them with the filenames above
+> 3. Remove this note once the images are in place
+
+---
+
 ## What is included
 
 - `app/main.py` — FastAPI backend, all API endpoints and generation logic
